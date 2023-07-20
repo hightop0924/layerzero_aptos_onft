@@ -1,0 +1,30 @@
+name: overmind-submission-run-tests
+run-name: Run tests for quest submission
+on:
+  workflow_dispatch:
+    inputs:
+      secretKey:
+        description: "Secret key sent to webhook to prevent maliciously calling webhook"
+        required: true
+        default: "INVALID_KEY"
+      questId:
+        description: "questId of submission"
+        required: true
+      userId:
+        description: "userId of submission"
+        required: true
+jobs:
+  run-tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: brew install aptos
+      - name: Run aptos move test
+        run: aptos move test > output.txt
+        continue-on-error: true
+      - name: Call webhook
+        run: |
+          webhook_url="https://mod.overmind.xyz/api/handle-test-run"
+          output=$(cat output.txt)
+          json_payload=$(python3 -c "import json, sys; print(json.dumps({'output': sys.argv[1], 'secretKey': '${{inputs.secretKey}}', 'questId': '${{inputs.questId}}', 'userId': '${{inputs.userId}}' }))" "$output")
+          curl -X POST -H "Content-Type: application/json" -d "$json_payload" "$webhook_url"
