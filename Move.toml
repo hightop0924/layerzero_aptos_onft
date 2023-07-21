@@ -1,14 +1,27 @@
 [package]
-name = "nftango"
+name = "merkly"
 version = "1.0.0"
 
 [addresses]
 std = "0x1"
 aptos_framework = "0x1"
 aptos_token = "0x3"
-overmind = "0x1337"
+aptos_token_objects = "0x4"
+layerzero_common = "0x0"
+executor_auth = "0x0"
+executor_v2 = "0x0"
+layerzero = "0x0"
+msglib_auth = "0x0"
+msglib_v1_1 = "0x0"
+msglib_v2 = "0x0"
+zro = "0x0"
+merkly = "0x1337"
+admin = "0x1337"
 
 [dependencies]
-MoveStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/move-stdlib", rev = "093b497d1267715a222845aad4fd3ca59da90e8d" }
-AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "093b497d1267715a222845aad4fd3ca59da90e8d" }
-AptosToken = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token/", rev = "093b497d1267715a222845aad4fd3ca59da90e8d" }
+MoveStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/move-stdlib", rev = "main" }
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "main" }
+AptosToken = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token/", rev = "main" }
+AptosTokenObjects = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token-objects/", rev = "main" }
+layerzero = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "layerzero", rev = "main" }
+layerzero_common = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "layerzero-common", rev = "main" }
