@@ -1,0 +1,11 @@
+
+- Compile and Test
+ # aptos move compile 
+ # aptos move test
+
+- LayerZero Reference
+ # https://layerzero.gitbook.io/docs/
+ # https://layerzero.gitbook.io/docs/technical-reference/mainnet/supported-chain-ids
+ # https://layerzero.gitbook.io/docs/technical-reference/testnet/testnet-addresses
+
+ 
