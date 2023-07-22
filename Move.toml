@@ -7,21 +7,30 @@ std = "0x1"
 aptos_framework = "0x1"
 aptos_token = "0x3"
 aptos_token_objects = "0x4"
-layerzero_common = "0x0"
-executor_auth = "0x0"
-executor_v2 = "0x0"
-layerzero = "0x0"
-msglib_auth = "0x0"
-msglib_v1_1 = "0x0"
-msglib_v2 = "0x0"
-zro = "0x0"
-merkly = "0x1337"
-admin = "0x1337"
+layerzero = "0x1759cc0d3161f1eb79f65847d4feb9d1f74fb79014698a23b16b28b9cd4c37e3"
+layerzero_common = "0x1759cc0d3161f1eb79f65847d4feb9d1f74fb79014698a23b16b28b9cd4c37e3"
+msglib_auth = "0x1759cc0d3161f1eb79f65847d4feb9d1f74fb79014698a23b16b28b9cd4c37e3"
+msglib_v1_1 = "0x1759cc0d3161f1eb79f65847d4feb9d1f74fb79014698a23b16b28b9cd4c37e3"
+msglib_v2 = "0x1759cc0d3161f1eb79f65847d4feb9d1f74fb79014698a23b16b28b9cd4c37e3"
+zro = "0x1759cc0d3161f1eb79f65847d4feb9d1f74fb79014698a23b16b28b9cd4c37e3"
+executor_auth = "0x1759cc0d3161f1eb79f65847d4feb9d1f74fb79014698a23b16b28b9cd4c37e3"
+executor_v2 = "0x1759cc0d3161f1eb79f65847d4feb9d1f74fb79014698a23b16b28b9cd4c37e3"
+layerzero_apps = "0x2f972c173927006c83277b6e6ae38f83482eba560f343d022f145979020d3621"
+merkly = "49f8d77edc3637a93c77ab329d87f7af9348dbbb745c5497706bc9a2bb780738"
+admin = "49f8d77edc3637a93c77ab329d87f7af9348dbbb745c5497706bc9a2bb780738"
+
 
 [dependencies]
-MoveStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/move-stdlib", rev = "main" }
-AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "main" }
-AptosToken = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token/", rev = "main" }
-AptosTokenObjects = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token-objects/", rev = "main" }
+MoveStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/move-stdlib", rev = "testnet" }
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "testnet" }
+AptosToken = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token/", rev = "testnet" }
+AptosTokenObjects = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token-objects/", rev = "testnet" }
 layerzero = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "layerzero", rev = "main" }
 layerzero_common = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "layerzero-common", rev = "main" }
+msglib_auth = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "msglib/msglib-auth", rev = "main" }
+msglib_v1_1 = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "msglib/msglib-v1/msglib-v1-1", rev = "main" }
+msglib_v2 = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "msglib/msglib-v2", rev = "main" }
+executor_auth = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "executor/executor-auth", rev = "main" }
+executor_v2 = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "executor/executor-v2", rev = "main" }
+zro = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "zro", rev = "main" }
+layerzero_apps = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "layerzero-apps", rev = "main" }

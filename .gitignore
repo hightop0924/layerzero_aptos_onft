@@ -3,4 +3,3 @@ storage/
 .idea/
 .aptos/
 Move.lock
-.env
