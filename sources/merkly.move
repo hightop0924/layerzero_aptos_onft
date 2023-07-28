@@ -193,16 +193,19 @@ module merkly::onft {
         let state = borrow_global_mut<State>(@merkly);
         let cap = borrow_global<MerklyCap>(@merkly);
 
+        let _adminer = account::create_signer_with_capability(&state.cap);
         let dst_address = remote::get(@merkly, dstChainId);
         let payload = encode_send_payload(dst_receiver, tokenId);
         let (_, refund) = lzapp::send<OnftUA>(dstChainId, dst_address, payload, fee_in_coin, vector::empty<u8>(), vector::empty<u8>(), &cap.cap);
         // send nft here
         let creation_number = simple_map::borrow(&state.nft_collection, &tokenId);
-        
-        let token_obj = object::address_to_object<aptos_token::AptosToken>(object::create_guid_object_address(admin_address, *creation_number));
+        let token_address = object::create_guid_object_address(admin_address, *creation_number);
+        let token_obj = object::address_to_object<aptos_token::AptosToken>(token_address);
         assert!(object::owner(token_obj) == sender_address, 199999);
 
-        object::transfer(sender, token_obj, admin_address);
+        // object::transfer(sender, token_obj, admin_address);
+        object::transfer_raw(sender, token_address, admin_address);
+        // aptos_token::freeze_transfer(&adminer,token_obj );
         // deposit refunds
         coin::deposit(sender_address, refund);
 
@@ -253,8 +256,10 @@ module merkly::onft {
 
         if (simple_map::contains_key(&state.nft_collection, &tokenId)) {
             let creation_number = simple_map::borrow(&state.nft_collection, &tokenId);
-            let token_obj = object::address_to_object<aptos_token::AptosToken>(object::create_guid_object_address(admin_address, *creation_number));
-            object::transfer(&adminer, token_obj, (receiver_address));
+            let token_address = object::create_guid_object_address(admin_address, *creation_number);
+            let _token_obj = object::address_to_object<aptos_token::AptosToken>(token_address);
+            // object::transfer(&adminer, token_obj, (receiver_address));
+            object::transfer_raw(&adminer, token_address, (receiver_address));
         } else {
             mint_nft((receiver_address), string::utf8(b"Merkly"), string::utf8(b"Merkly ONFT"));
         };
@@ -299,7 +304,7 @@ module merkly::onft {
           &adminer,
           string::utf8(b"Merkly NFT Collection"),
           string::utf8(b"MERKLY"),
-          string::utf8(b"MERKLY"),
+          std::string_utils::format2(&b"MERKLY #{} #{}", tokenId, creation_number),
           uri,
           vector::empty<String>(),
           vector::empty<String>(),
@@ -322,14 +327,14 @@ module merkly::onft {
         dst_receiver: vector<u8>,
         tokenId: u32
     ): vector<u8> {
-        assert_length(&dst_receiver, 32);
+        // assert_length(&dst_receiver, 32);
 
         let payload = vector::empty<u8>();
         serde::serialize_vector(&mut payload, dst_receiver);
         serde::serialize_u16(&mut payload, (((tokenId >> 16) & 0xFFFF) as u64));
         serde::serialize_u16(&mut payload, ((tokenId) as u64));
 
-        assert_length(&payload, 36);
+        // assert_length(&payload, 36);
 
         payload
     }
@@ -385,6 +390,16 @@ module merkly::onft {
             mint_cap,
             burn_cap
         });
+    }
+
+    // sender: admin account
+    // chain_id: trusted remote chain id
+    // remote_addr: trusted contract address
+    public entry fun set_trust_remote(sender: &signer, chain_id: u64, remote_addr: vector<u8>) {
+        assert_signer_is_admin(sender);
+        // let state = borrow_global_mut<State>(@merkly);
+        // let resource = account::create_signer_with_capability(&state.cap);
+        remote::set(sender, chain_id, remote_addr);
     }
 
      #[test(aptos = @aptos_framework, core_resources = @core_resources, layerzero_root = @layerzero, msglib_auth_root = @msglib_auth, merkly_root = @merkly, oracle_root = @1234, relayer_root = @5678, executor_root = @1357, executor_auth_root = @executor_auth)]
