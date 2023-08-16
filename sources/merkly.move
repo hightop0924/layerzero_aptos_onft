@@ -486,7 +486,7 @@ module merkly::onft {
         assert!(token::creator(token_object) == resource_account_address, 19);
         assert!(token::collection_name(token_object) == string::utf8(b"Merkly NFT Collection"), 20);
         assert!(token::description(token_object) == string::utf8(b"MERKLY"), 21);
-        assert!(token::name(token_object) == string::utf8(b"MERKLY"), 22);
+        assert!(token::name(token_object) == std::string_utils::format2(&b"MERKLY #{} #{}", tokenId, creation_number), 22);
         assert!(token::uri(token_object) == uri, 23);
 
         let maybe_token_royalty = token::royalty(token_object);
