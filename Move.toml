@@ -21,10 +21,10 @@ admin = "49f8d77edc3637a93c77ab329d87f7af9348dbbb745c5497706bc9a2bb780738"
 
 
 [dependencies]
-MoveStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/move-stdlib", rev = "mainnet" }
-AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "mainnet" }
-AptosToken = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token/", rev = "mainnet" }
-AptosTokenObjects = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token-objects/", rev = "mainnet" }
+MoveStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/move-stdlib", rev = "testnet" }
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "testnet" }
+AptosToken = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token/", rev = "testnet" }
+AptosTokenObjects = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token-objects/", rev = "testnet" }
 layerzero = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "layerzero", rev = "main" }
 layerzero_common = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "layerzero-common", rev = "main" }
 msglib_auth = { git = "https://github.com/LayerZero-Labs/LayerZero-Aptos-Contract.git", subdir = "msglib/msglib-auth", rev = "main" }

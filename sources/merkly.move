@@ -16,6 +16,7 @@ module merkly::onft {
     use aptos_framework::object::{Self};
     use aptos_token_objects::aptos_token;
     use aptos_std::from_bcs::to_address;
+    use merkly::auid_manager::{Self};
 
 
     // Constants
@@ -283,6 +284,8 @@ module merkly::onft {
     ) : (u32, u64, String) acquires State  {
         assert_state_initialized();
 
+        let auids = auid_manager::create();
+
         let admin_address = account::create_resource_address(&@merkly, MERKLY_SEED);
 
         let state = borrow_global_mut<State>(@merkly);
@@ -313,11 +316,17 @@ module merkly::onft {
 
         state.nextMintId = tokenId + 1;
 
-        let token_obj = object::address_to_object<aptos_token::AptosToken>(object::create_guid_object_address(admin_address, creation_number));
+        // let token_address = object::create_guid_object_address(admin_address, creation_number);
+
+        let token_address = auid_manager::increment(&mut auids);
+
+        let token_obj = object::address_to_object<aptos_token::AptosToken>(token_address);
         
         object::transfer(&adminer, token_obj, account);
 
         simple_map::add(&mut state.nft_collection, tokenId, creation_number);
+
+        auid_manager::destroy(auids);
 
         (tokenId, creation_number, uri)
     }
